@@ -29,5 +29,5 @@ body {
   height: 26px;
   width: 100%;
   background-color: var(--status-bar-background-color);
-  
+  filter: drop-shadow(0 -1mm 3mm rgba(0, 0, 0, 0.527));
 }
