@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QuikEdit</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
     <script type="module" src="/main.js" defer></script>
     <style>
       .logo.vanilla:hover {
@@ -15,7 +17,34 @@
 
   <body>
     <div>
-      <div class="status-bar">
+      <div id="header-bar">
+        <ul id="tab-links">
+          <li id="tab-link" class="active" data-tab="#workspace1">Workspace 1</li>
+          <li id="tab-link" data-tab="#workspace2">Workspace 2</li>
+          <li id="tab-link" data-tab="#workspace3">Workspace 3</li>
+        </ul>
+      </div>
+
+      <div id="main-container">
+        <div id="tabs-contents">
+          <div id="workspace1" class="active">
+            <h2>Workspace 1 Content</h2>
+            <p>This is the content of Workspace 1.</p>
+          </div>
+      
+          <div id="workspace2">
+            <h2>Workspace 2 Content</h2>
+            <p>This is the content of Workspace 2.</p>
+          </div>
+      
+          <div id="workspace3">
+            <h2>Workspace 3 Content</h2>
+            <p>This is the content of Workspace 3.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div id="status-bar">
         
       </div>
     </div>
