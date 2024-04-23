@@ -32,7 +32,7 @@ body {
   color: var(color);
 }
 
-#header-bar {
+#headerBar {
   display: flex;
   position: fixed;
   left: 0px;
@@ -45,14 +45,14 @@ body {
   border-bottom-style: solid;
 }
 
-#tab-links {
+#tabLinks {
   display: flex;
   justify-content: left;
   align-items: start;
   height: 100%;
 }
 
-#tab-link {
+#tabLink {
   display: flex;
   height: 100%;
   justify-content: center;
@@ -62,15 +62,15 @@ body {
   user-select: none;
 }
 
-#tab-link:hover {
+#tabLink:hover {
   background-color: var(--status-bar-hover-color);
 }
 
-#tab-link.active {
+#tabLink.active {
   background-color: var(--status-bar-select-color);
 }
 
-#main-container {
+#mainContainer {
   display: flex;
   position: fixed;
   left: 0px;
@@ -79,22 +79,27 @@ body {
   width: 100%;
 }
 
-#tabs-contents {
+.workspace-tab-bar {
+  width: 100%;
+  height: 48px;
+}
+
+#tabsContents {
   width: 100%;
   height: 100%;
 }
 
-#tabs-contents div {
+#tabsContents div {
   width: 100%;
   height: 100%;
-  display: none;
-}
-
-#tabs-contents div.active {
   display: block;
 }
 
-#status-bar {
+.hidden {
+  display: none !important;
+}
+
+#statusBar {
   display: flex;
   position: fixed;
   left: 0px;

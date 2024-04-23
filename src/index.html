@@ -17,34 +17,33 @@
 
   <body>
     <div>
-      <div id="header-bar">
-        <ul id="tab-links">
-          <li id="tab-link" class="active" data-tab="#workspace1">Workspace 1</li>
-          <li id="tab-link" data-tab="#workspace2">Workspace 2</li>
-          <li id="tab-link" data-tab="#workspace3">Workspace 3</li>
+      <div id="headerBar">
+        <ul id="tabLinks">
+          <li id="tabLink" class="active" data-tab="#workspace1">Workspace 1</li>
+          <li id="tabLink" data-tab="#workspace2">Workspace 2</li>
         </ul>
       </div>
 
-      <div id="main-container">
-        <div id="tabs-contents">
+      <div id="mainContainer">
+        <div id="tabsContents">
           <div id="workspace1" class="active">
-            <h2>Workspace 1 Content</h2>
-            <p>This is the content of Workspace 1.</p>
+            <div id="workspace-bar1" class="workspace-tab-bar">
+              <ul id="tabLinks">
+                <li id="tabLink" class="active" data-tab="#workspace1tab1">Tab 1</li>
+              </ul>
+            </div>
           </div>
-      
           <div id="workspace2">
-            <h2>Workspace 2 Content</h2>
-            <p>This is the content of Workspace 2.</p>
-          </div>
-      
-          <div id="workspace3">
-            <h2>Workspace 3 Content</h2>
-            <p>This is the content of Workspace 3.</p>
+            <div id="workspace-bar2" class="workspace-tab-bar">
+              <ul id="tabLinks">
+                <li id="tabLink" class="active" data-tab="#workspace2tab1">Tab 1a</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
       
-      <div id="status-bar">
+      <div id="statusBar">
         
       </div>
     </div>

@@ -3,13 +3,13 @@
 
 // Main Tab System
 $(document).ready(function(){
-  $('#tab-links #tab-link').on('click', function(){
+  $('#tabLinks #tabLink').on('click', function(){
     var targetTab = $(this).data('tab');
 
     // Show/Hide Tabs
-    $(targetTab).show().siblings('#tabs-contents div').hide();
+    $(targetTab).removeAttr('hidden').siblings('#tabsContents div').attr('hidden', 'hidden');
 
     // Change/remove current tab to active
-    $(this).addClass('active').siblings('#tab-link').removeClass('active');
+    $(this).addClass('active').siblings('#tabLink').removeClass('active');
   });
 });
