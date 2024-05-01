@@ -5,9 +5,11 @@
   font-weight: 400;
 
   color: #ffffff;
-  background-color: #0b1215;
+  background-color: #000c0f;
 
-  --background-color: #0b1215;
+  --background-color: #000c0f;
+
+  --tab-content-background-color: #0b1215;
 
   --status-bar-background-color: #17262c;
   --status-bar-hover-color: #101a1f;
@@ -121,6 +123,40 @@ body {
   width: 100%;
   height: 100%;
   display: block;
+  background-color: var(--tab-content-background-color);
+}
+
+#defaultPage {
+  background-color: transparent !important;
+  padding: 40px 20px;
+  color: gray;
+  text-align: center;
+  user-select: none;
+  overflow-y: auto;
+}
+
+#defaultPage h1 {
+  font-size: 7em;
+  line-height: 2em;
+}
+
+#defaultPage h2 {
+  font-size: 2.25em;
+  line-height: 1em;
+}
+
+
+#defaultPage h3 {
+  font-size: 2em;
+  line-height: 1em;
+  font-weight: 500;
+}
+
+.keyboard-button {
+  font-size: 0.75em;
+  padding: 4px;
+  background-color: #17262c;
+  border-radius: 6px;
 }
 
 .hidden {
