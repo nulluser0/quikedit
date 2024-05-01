@@ -19,32 +19,35 @@
     <div>
       <div id="headerBar">
         <ul id="tabLinks">
-          <li id="tabLink" class="active" data-tab="#workspace1">Workspace 1</li>
-          <li id="tabLink" data-tab="#workspace2">Workspace 2</li>
+          <li id="tabLink" class="active" data-tab="#tab1">Tab 1</li>
+          <li id="tabLink" data-tab="#tab2">Tab 2</li>
+
+          <li id="tabNewTabButton" accesskey="control + T">＋</li>
         </ul>
       </div>
 
       <div id="mainContainer">
         <div id="tabsContents">
-          <div id="workspace1" class="active">
-            <div id="workspace-bar1" class="workspace-tab-bar">
-              <ul id="tabLinks">
-                <li id="tabLink" class="active" data-tab="#workspace1tab1">Tab 1</li>
-              </ul>
-            </div>
+          <div id="tab1">
+            <textarea class="text-input"></textarea>
           </div>
-          <div id="workspace2">
-            <div id="workspace-bar2" class="workspace-tab-bar">
-              <ul id="tabLinks">
-                <li id="tabLink" class="active" data-tab="#workspace2tab1">Tab 1a</li>
-              </ul>
-            </div>
+          <div id="tab2">
+            <textarea class="text-input"></textarea>
           </div>
         </div>
       </div>
       
       <div id="statusBar">
-        
+        <div id="leftStatusBar">
+          <!-- Contains DIVs -->
+
+        </div>
+        <div id="rightStatusBar">
+          <!-- Contains DIVs -->
+          <div class="status-bar-item">
+            Ln _, Col _
+          </div>
+        </div>
       </div>
     </div>
   </body>
