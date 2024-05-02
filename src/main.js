@@ -37,6 +37,9 @@ function tabLinksScrollToSpecificTab(tab) {
 // New tab. (Ctrl + T)
 function newTab() {
   var newTabId = $('#tabLinks #tabLink').length + 1;
+  while ($('#tab' + newTabId).length > 0) {
+    newTabId++;
+  }
   var newTab = $('<li id="tabLink" data-tab="#tab' + newTabId + '">Tab ' + newTabId + '</li>');
   var newTabContent = $('<div id="tab' + newTabId + '"><textarea class="text-input"></textarea></div>')
   $('#tabNewTabButton').before(newTab);
