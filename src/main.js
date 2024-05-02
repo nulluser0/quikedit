@@ -151,3 +151,12 @@ $(document).on('keydown', null, 'Ctrl+T', function() {newTab()});
 $(document).on('keydown', null, 'Ctrl+W', function() {deleteTab()});
 $(document).on('keydown', null, 'Ctrl+Tab', function() {nextTab()});
 $(document).on('keydown', null, 'Ctrl+Shift+Tab', function() {prevTab()});
+
+// Ignore certain keybinds from completing their default behaviour.
+window.addEventListener('keydown', function(e) {
+  // Check if the key pressed is 'R' and Ctrl (or Command) key is pressed simultaneously
+  if ((e.key === 'r' || e.key === 'R') && (e.ctrlKey || e.metaKey)) {
+    // Prevent the default browser refresh behavior
+    e.preventDefault();
+  }
+});
