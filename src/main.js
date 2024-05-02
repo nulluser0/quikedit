@@ -1,6 +1,8 @@
-const { invoke } = window.__TAURI__.tauri;
+// const { invoke } = window.__TAURI__.tauri;
 
-const { register } = window.__TAURI__.globalShortcut;
+const { JSDOM } = require( "jsdom" );
+const { window } = new JSDOM( "" );
+const $ = require( "jquery" )( window );
 
 function getLineNumber(textarea, indicator) {
   indicator.innerHTML = textarea.value.substr(0, textarea.selectionStart).split("\n").length;
@@ -115,18 +117,4 @@ $(document).on('click', '#tabLink', function(){
   
 $('#tabNewTabButton').on('click', newTab);
 
-await register('CommandOrControl+T', () => {
-  newTab();
-});
-
-await register('CommandOrControl+Tab', () => {
-  nextTab();
-})
-
-await register('CommandOrControl+Shift+Tab', () => {
-  prevTab();
-})
-
-await register('CommandOrControl+W', () => {
-  deleteTab();
-})
+$(document).bind('keydown', 'ctrl+t', newTab());
