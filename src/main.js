@@ -22,6 +22,8 @@ function newTab() {
 
   $(newTab).addClass('active').siblings('#tabLink').removeClass('active');
   $(newTabContent).removeClass('hidden').siblings('#tabsContents div').addClass('hidden');
+
+  $(newTabContent).children('.text-input').trigger("focus");
 }
 
 function deleteTab() {
@@ -51,6 +53,8 @@ function deleteTab() {
   // Delete tabs.
   $(currentDeletionTab).remove();
   $(targetDeletionTab).remove();
+  
+  $(targetNextTab).children('.text-input').trigger("focus");
 
   showDefaultPageCheck()
 }
@@ -72,6 +76,8 @@ function nextTab() {
 
   // Change/remove current tab to active
   $(nextTab).addClass('active').siblings('#tabLink').removeClass('active');
+
+  $(targetTab).children('.text-input').trigger("focus");
 }
 
 // Tab before. (Ctrl + Shift + Tab)
@@ -91,6 +97,8 @@ function prevTab() {
 
   // Change/remove current tab to active
   $(nextTab).addClass('active').siblings('#tabLink').removeClass('active');
+
+  $(targetTab).children('.text-input').trigger("focus");
 }
 
 $(document).on('click', '#tabLink', function(){
@@ -101,6 +109,8 @@ $(document).on('click', '#tabLink', function(){
 
   // Change/remove current tab to active
   $(this).addClass('active').siblings('#tabLink').removeClass('active');
+
+  $(targetTab).children('.text-input').trigger("focus");
 });
   
 $('#tabNewTabButton').on('click', newTab);
