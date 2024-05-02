@@ -12,11 +12,11 @@ function showDefaultPageCheck() {
   }
 }
 
-var tabLinksScrollAnimation = null;
+let tabLinksScrollAnimation = null;
 
 function tabLinksScrollToSpecificTab(tab) {
-  var container = $('#tabLinks');
-  var scrollTo = $(tab).position().left + container.scrollLeft();
+  let container = $('#tabLinks');
+  let scrollTo = $(tab).position().left + container.scrollLeft();
 
   // Cancel ongoing animation, if any
   if (tabLinksScrollAnimation !== null) {
@@ -36,12 +36,12 @@ function tabLinksScrollToSpecificTab(tab) {
 
 // New tab. (Ctrl + T)
 function newTab() {
-  var newTabId = $('#tabLinks #tabLink').length + 1;
+  let newTabId = $('#tabLinks #tabLink').length + 1;
   while ($('#tab' + newTabId).length > 0) {
     newTabId++;
   }
-  var newTab = $('<li id="tabLink" data-tab="#tab' + newTabId + '">Tab ' + newTabId + '</li>');
-  var newTabContent = $('<div id="tab' + newTabId + '"><textarea class="text-input"></textarea></div>')
+  let newTab = $('<li id="tabLink" data-tab="#tab' + newTabId + '">Tab ' + newTabId + '</li>');
+  let newTabContent = $('<div id="tab' + newTabId + '"><textarea class="text-input"></textarea></div>')
   $('#tabNewTabButton').before(newTab);
   $('#mainContainer').children().append(newTabContent);
 
@@ -54,8 +54,8 @@ function newTab() {
 }
 
 function deleteTab() {
-  var currentDeletionTab = $('#tabLinks .active');
-  var previousTab = currentDeletionTab.prev('#tabLink');
+  let currentDeletionTab = $('#tabLinks .active');
+  let previousTab = currentDeletionTab.prev('#tabLink');
   if (previousTab.length === 0) {
     // If there is no previous tab, next tab
     previousTab = currentDeletionTab.next('#tabLink');
@@ -64,8 +64,8 @@ function deleteTab() {
     previousTab = null;
   }
 
-  var targetDeletionTab = $(currentDeletionTab).data('tab');
-  var targetNextTab = $(previousTab).data('tab');
+  let targetDeletionTab = $(currentDeletionTab).data('tab');
+  let targetNextTab = $(previousTab).data('tab');
 
   // TODO: There should be an area which stops/warns you before deleting the current tab.
 
@@ -88,15 +88,15 @@ function deleteTab() {
 
 // Tab after. (Ctrl + Tab)
 function nextTab() {
-  var currentActiveTab = $('#tabLinks .active');
-  var nextTab = currentActiveTab.next('#tabLink');
+  let currentActiveTab = $('#tabLinks .active');
+  let nextTab = currentActiveTab.next('#tabLink');
 
   if (nextTab.length === 0) {
     // If there is no next tab, switch to the first tab
     nextTab = $('#tabLinks #tabLink').first();
   }
 
-  var targetTab = $(nextTab).data('tab');
+  let targetTab = $(nextTab).data('tab');
 
   // Show/Hide Tabs
   $(targetTab).removeClass('hidden').siblings('#tabsContents div').addClass('hidden');
@@ -111,15 +111,15 @@ function nextTab() {
 
 // Tab before. (Ctrl + Shift + Tab)
 function prevTab() {
-  var currentActiveTab = $('#tabLinks .active');
-  var nextTab = currentActiveTab.prev('#tabLink');
+  let currentActiveTab = $('#tabLinks .active');
+  let nextTab = currentActiveTab.prev('#tabLink');
 
   if (nextTab.length === 0) {
     // If there is no next tab, switch to the first tab
     nextTab = $('#tabLinks #tabLink').last();
   }
 
-  var targetTab = $(nextTab).data('tab');
+  let targetTab = $(nextTab).data('tab');
 
   // Show/Hide Tabs
   $(targetTab).removeClass('hidden').siblings('#tabsContents div').addClass('hidden');
@@ -133,7 +133,7 @@ function prevTab() {
 }
 
 $(document).on('click', '#tabLink', function(){
-  var targetTab = $(this).data('tab');
+  let targetTab = $(this).data('tab');
 
   // Show/Hide Tabs
   $(targetTab).removeClass('hidden').siblings('#tabsContents div').addClass('hidden');
