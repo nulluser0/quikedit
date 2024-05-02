@@ -14,15 +14,12 @@
       "shell": {
         "all": false,
         "open": true
-      },
-      "globalShortcut": {
-        "all": true
       }
     },
     "windows": [
       {
         "title": "QuikEdit",
-        "width": 800,
+        "width": 1000,
         "height": 600
       }
     ],

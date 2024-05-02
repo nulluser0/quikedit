@@ -5,7 +5,9 @@
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QuikEdit</title>
-    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/jquery/jquery.min.js" defer></script>
+    <script type="text/javascript" src="/jquery/jquery-hotkeys.js" defer></script>
+    <script type="text/javascript" src="/jquery/jquery-ui.min.js" defer></script>
     <script type="module" src="/main.js" defer></script>
     <style>
       .logo.vanilla:hover {
@@ -17,7 +19,7 @@
   <body>
     <div>
       <div id="headerBar">
-        <ul id="tabLinks">
+        <ul id="tabLinks" class="no-visible-scrollbar">
           
 
           <li id="tabNewTabButton">＋</li>
@@ -29,15 +31,15 @@
           <div id="defaultPage">
             <h1>QuikEdit</h1>
             <br>
-            <h2>Keyboard Shortcuts:</h2>
+            <h3>Keyboard Shortcuts:</h3>
             <br>
-            <h3>New Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">T</span></h3>
+            <p>New Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">T</span></p>
             <br>
-            <h3>Close Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">W</span></h3>
+            <p>Close Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">W</span></p>
             <br>
-            <h3>Next Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">Tab</span></h3>
+            <p>Next Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">Tab</span></p>
             <br>
-            <h3>Previous Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">Shift</span> + <span class="keyboard-button">Tab</span></h3>
+            <p>Previous Tab: <span class="keyboard-button">Ctrl</span> + <span class="keyboard-button">Shift</span> + <span class="keyboard-button">Tab</span></p>
           </div>
         </div>
       </div>
@@ -49,8 +51,8 @@
         </div>
         <div id="rightStatusBar">
           <!-- Contains DIVs -->
-          <div class="status-bar-item">
-            Ln _, Col _
+          <div id="lineColIndicator" class="status-bar-item">
+            
           </div>
         </div>
       </div>

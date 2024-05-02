@@ -12,6 +12,7 @@
   "dependencies": {
     "@tauri-apps/api": "^1.5.4",
     "jquery": "^3.7.1",
-    "jquery-hotkeys": "^0.2.2"
+    "jquery-hotkeys": "^0.2.2",
+    "jquery-ui": "^1.13.3"
   }
 }

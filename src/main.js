@@ -1,8 +1,6 @@
 // const { invoke } = window.__TAURI__.tauri;
 
-const { JSDOM } = require( "jsdom" );
-const { window } = new JSDOM( "" );
-const $ = require( "jquery" )( window );
+jQuery.hotkeys.options.filterInputAcceptingElements = false
 
 function getLineNumber(textarea, indicator) {
   indicator.innerHTML = textarea.value.substr(0, textarea.selectionStart).split("\n").length;
@@ -13,6 +11,28 @@ function showDefaultPageCheck() {
     $('#defaultPage').removeClass('hidden');
   }
 }
+
+var tabLinksScrollAnimation = null;
+
+function tabLinksScrollToSpecificTab(tab) {
+  var container = $('#tabLinks');
+  var scrollTo = $(tab).position().left + container.scrollLeft();
+
+  // Cancel ongoing animation, if any
+  if (tabLinksScrollAnimation !== null) {
+    tabLinksScrollAnimation.stop();
+  }
+
+  // Animate scrolling
+  tabLinksScrollAnimation = container.stop().animate({ scrollLeft: scrollTo }, {
+    duration: 200,
+    easing: 'easeInOutQuart',
+    complete: function() {
+      tabLinksScrollAnimation = null; // Reset animation object
+    }
+  });
+}
+
 
 // New tab. (Ctrl + T)
 function newTab() {
@@ -26,6 +46,8 @@ function newTab() {
   $(newTabContent).removeClass('hidden').siblings('#tabsContents div').addClass('hidden');
 
   $(newTabContent).children('.text-input').trigger("focus");
+
+  tabLinksScrollToSpecificTab(newTab);
 }
 
 function deleteTab() {
@@ -58,7 +80,7 @@ function deleteTab() {
   
   $(targetNextTab).children('.text-input').trigger("focus");
 
-  showDefaultPageCheck()
+  showDefaultPageCheck();
 }
 
 // Tab after. (Ctrl + Tab)
@@ -80,6 +102,8 @@ function nextTab() {
   $(nextTab).addClass('active').siblings('#tabLink').removeClass('active');
 
   $(targetTab).children('.text-input').trigger("focus");
+
+  tabLinksScrollToSpecificTab(nextTab);
 }
 
 // Tab before. (Ctrl + Shift + Tab)
@@ -101,6 +125,8 @@ function prevTab() {
   $(nextTab).addClass('active').siblings('#tabLink').removeClass('active');
 
   $(targetTab).children('.text-input').trigger("focus");
+
+  tabLinksScrollToSpecificTab(nextTab);
 }
 
 $(document).on('click', '#tabLink', function(){
@@ -117,4 +143,8 @@ $(document).on('click', '#tabLink', function(){
   
 $('#tabNewTabButton').on('click', newTab);
 
-$(document).bind('keydown', 'ctrl+t', newTab());
+// Document Keyboard Shortcuts
+$(document).on('keydown', null, 'Ctrl+T', function() {newTab()});
+$(document).on('keydown', null, 'Ctrl+W', function() {deleteTab()});
+$(document).on('keydown', null, 'Ctrl+Tab', function() {nextTab()});
+$(document).on('keydown', null, 'Ctrl+Shift+Tab', function() {prevTab()});
