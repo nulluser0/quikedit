@@ -196,6 +196,12 @@ $(document).on('click', '#tabLink', function(){
 
 $('#tabNewTabButton').on('click', newTab);
 
+// Scroll on X
+document.getElementById("tabLinks").addEventListener("wheel", function (e) {
+    if (e.deltaY > 0) document.getElementById("tabLinks").scrollLeft += 100;
+    else document.getElementById("tabLinks").scrollLeft -= 100;
+  });
+
 // Document Keyboard Shortcuts
 $(document).on('keydown', null, 'Ctrl+T', function(e) {e.preventDefault(); newTab()});
 $(document).on('keydown', null, 'Ctrl+W', function(e) {e.preventDefault(); deleteTab()});
