@@ -33,6 +33,19 @@ function tabLinksScrollToSpecificTab(tab) {
   });
 }
 
+function openCommandPalette() {
+  $('#commandPalette').removeClass('hidden');
+  $('#commandPalette').find('input').trigger('focus');
+}
+
+function closeCommandPalette() {
+  $('#commandPalette').addClass('hidden');
+  $('#commandPalette').find('input').trigger('blur');
+
+  // let currentTab = $('#tabLinks .active');
+  // let currentTargetTab = $(currentTab).data('tab');
+  // $(currentTargetTab).children('.text-input').trigger("focus");
+}
 
 // New tab. (Ctrl + T)
 function newTab() {
@@ -132,6 +145,20 @@ function prevTab() {
   tabLinksScrollToSpecificTab(nextTab);
 }
 
+function moveTabLeft() {
+  let currentActiveTab = $('#tabLinks .active');
+  let leftTab = currentActiveTab.prev('#tabLink');
+
+  $(currentActiveTab).insertBefore(leftTab);
+}
+
+function moveTabRight() {
+  let currentActiveTab = $('#tabLinks .active');
+  let rightTab = currentActiveTab.next('#tabLink');
+
+  $(currentActiveTab).insertAfter(rightTab);
+}
+
 $(document).on('click', '#tabLink', function(){
   let targetTab = $(this).data('tab');
 
@@ -143,7 +170,7 @@ $(document).on('click', '#tabLink', function(){
 
   $(targetTab).children('.text-input').trigger("focus");
 });
-  
+
 $('#tabNewTabButton').on('click', newTab);
 
 // Document Keyboard Shortcuts
@@ -151,4 +178,18 @@ $(document).on('keydown', null, 'Ctrl+T', function(e) {e.preventDefault(); newTa
 $(document).on('keydown', null, 'Ctrl+W', function(e) {e.preventDefault(); deleteTab()});
 $(document).on('keydown', null, 'Ctrl+Tab', function(e) {e.preventDefault(); nextTab()});
 $(document).on('keydown', null, 'Ctrl+Shift+Tab', function(e) {e.preventDefault(); prevTab()});
+
+$(document).on('keydown', null, 'Ctrl+Shift+P', function(e) {e.preventDefault(); openCommandPalette()});
+$('#commandPalette input').on('keydown', null, 'Esc', function(e) {e.preventDefault(); closeCommandPalette()});
+$(document).on('keydown', null, 'Esc', function(e) {e.preventDefault(); closeCommandPalette()});
+$(document).on('click', function(e){
+  if (!$('#commandPalette').is(e.target) && !$('#commandPalette').has(e.target).length) {
+    closeCommandPalette();
+  }
+});
+
 $(document).on('keydown', null, 'Ctrl+R', function(e) {e.preventDefault()});
+$(document).on('keydown', null, 'Ctrl+P', function(e) {e.preventDefault()});
+
+$(document).on('keydown', null, 'Alt+Left', function(e) {e.preventDefault(); moveTabLeft()});
+$(document).on('keydown', null, 'Alt+Right', function(e) {e.preventDefault(); moveTabRight()});
