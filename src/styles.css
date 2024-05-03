@@ -108,9 +108,12 @@ body {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--status-bar-hover-color);
+  background-color: var(--status-bar-background-color);
   top: var(--tab-bar-height);
   margin-top: 12px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 #mainContainer {
