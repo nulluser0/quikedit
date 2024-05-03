@@ -47,6 +47,29 @@ function closeCommandPalette() {
   // $(currentTargetTab).children('.text-input').trigger("focus");
 }
 
+function increaseFontSize() {
+  let currentTab = $("#tabLinks .active");
+  let targetTab = $(currentTab).data('tab');
+  let fontSize = parseInt($(targetTab).children('.text-input').css("font-size"));
+  fontSize = fontSize + 1 + "px";
+  $(targetTab).children('.text-input').css({'font-size':fontSize});
+}
+
+function decreaseFontSize() {
+  let currentTab = $("#tabLinks .active");
+  let targetTab = $(currentTab).data('tab');
+  let fontSize = parseInt($(targetTab).children('.text-input').css("font-size"));
+  fontSize = fontSize - 1 + "px";
+  $(targetTab).children('.text-input').css({'font-size':fontSize});
+}
+
+function resetFontSize() {
+  let currentTab = $("#tabLinks .active");
+  let targetTab = $(currentTab).data('tab');
+  let fontSize = "14px"
+  $(targetTab).children('.text-input').css({'font-size':fontSize});
+}
+
 // New tab. (Ctrl + T)
 function newTab() {
   let newTabId = $('#tabLinks #tabLink').length + 1;
@@ -193,3 +216,7 @@ $(document).on('keydown', null, 'Ctrl+P', function(e) {e.preventDefault()});
 
 $(document).on('keydown', null, 'Alt+Left', function(e) {e.preventDefault(); moveTabLeft()});
 $(document).on('keydown', null, 'Alt+Right', function(e) {e.preventDefault(); moveTabRight()});
+
+$(document).on('keydown', null, 'Ctrl+=', function(e) {e.preventDefault(); increaseFontSize()});
+$(document).on('keydown', null, 'Ctrl+-', function(e) {e.preventDefault(); decreaseFontSize()});
+$(document).on('keydown', null, 'Ctrl+0', function(e) {e.preventDefault(); resetFontSize()});
