@@ -103,6 +103,16 @@ body {
   background-color: var(--status-bar-select-color);
 }
 
+#commandPalette {
+  display: flex;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--status-bar-hover-color);
+  top: var(--tab-bar-height);
+  margin-top: 12px;
+}
+
 #mainContainer {
   display: flex;
   position: fixed;
