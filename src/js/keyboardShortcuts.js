@@ -30,9 +30,12 @@ $(document).on('keydown', null, 'Ctrl+0', function (e) { e.preventDefault(); tex
 $(document).on('keydown', null, 'Ctrl+R', function (e) { e.preventDefault() });
 $(document).on('keydown', null, 'Ctrl+P', function (e) { e.preventDefault() });
 
-$(document).on('keydown', null, 'Ctrl+O', function (e) {
+$(document).on('keydown', null, 'Ctrl+O', async function (e) {
   e.preventDefault();
-  let debugresult, debugresult2 = fileUtils.requestFile();
-
-  console.log(debugresult, debugresult2);
+  try {
+    let filePath = await fileUtils.requestFile(); // Wait for requestFile promise to resolve
+    await fileUtils.openFile(filePath); // Wait for openFile promise to resolve
+  } catch (error) {
+    console.error('Error:', error);
+  }
 });

@@ -1,6 +1,9 @@
 const { invoke } = window.__TAURI__.tauri;
 const tauri = window.__TAURI__;
 
+import * as gateway from './gateway.js';
+import * as tabManagement from './tabManagement.js';
+
 export async function requestFile() {
     const result = await tauri.dialog.open({
         title: "Open File",
@@ -14,27 +17,20 @@ export async function requestFile() {
         ]
     });
 
-    
-
-    if (result) return result.replace('.txt', '');
-
-    result = result.split('\\');
-    result = result[result.length - 1];
-    
-    let thingy = await openFile(result);
-
-    await console.log(result, thingy)
-
-    return result, thingy;
+    if (result) return result;
+    return;
 }
 
 export async function openFile(path) {
     if (!path) return;
 
-    path = path.split('\\');
-    path = path[path.length - 1];
-
     await console.log(path);
 
-    return path;
+    let contents = await gateway.open_file(path);
+
+    await console.log(contents);
+
+    await tabManagement.openTabFromFile(path, contents)
+
+    return;
 }

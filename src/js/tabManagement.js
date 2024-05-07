@@ -43,6 +43,24 @@ export function newTab() {
     $(newTabContent).children('.text-input').trigger("focus");
 
     tabLinksScrollToSpecificTab(newTab);
+    return [newTab, newTabContent];
+}
+
+// Open tab from file
+export function openTabFromFile(directory, content) {
+    // Split the file path using the directory separator
+    let fileName = directory.split(/[\\/]/);
+    // Return the last part of the path, which will be the file name
+    fileName = fileName[fileName.length - 1];
+    
+    let [tab, tabContent] = newTab(); // Create a new tab
+
+    console.log(tab, tabContent);
+    
+    $(tab).text(fileName);
+    $(tab).data('savedirectory', directory);
+    console.log($(tab).data('savedirectory'))
+    $(tabContent).children('.text-input').text(content);
 }
 
 // Delete tab
