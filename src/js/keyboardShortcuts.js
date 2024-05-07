@@ -1,6 +1,7 @@
 import * as tabManagement from './tabManagement.js';
 import * as commandPalette from './commandPalette.js';
 import * as textInputManagement from './textInputManagement.js';
+import * as fileUtils from './fileUtils.js';
 
 // Tab Management:
 $(document).on('keydown', null, 'Ctrl+T', function (e) { e.preventDefault(); tabManagement.newTab() });
@@ -29,5 +30,9 @@ $(document).on('keydown', null, 'Ctrl+0', function (e) { e.preventDefault(); tex
 $(document).on('keydown', null, 'Ctrl+R', function (e) { e.preventDefault() });
 $(document).on('keydown', null, 'Ctrl+P', function (e) { e.preventDefault() });
 
+$(document).on('keydown', null, 'Ctrl+O', function (e) {
+  e.preventDefault();
+  let debugresult, debugresult2 = fileUtils.requestFile();
 
-
+  console.log(debugresult, debugresult2);
+});
