@@ -42,12 +42,20 @@ $(document).on('keydown', null, 'Ctrl+O', async function (e) {
 });
 
 $(document).on('keydown', null, 'Ctrl+S', async function (e) {
+  // TODO: put check for data savedirectory;
   e.preventDefault();
   let tabLink = $('#tabLinks .active');
-  let tabContent = tabLink.data('tab').children('.text-input').text();
+  let targetTab = tabLink.data('tab');
 
-  if (!tabContent || !tabLink) {
-    console.log('Nothing to save...');
+  if (!targetTab) {
+    console.log('Save: No active tab...');
+    return;
+  };
+
+  let tabContent = $(targetTab).children('.text-input');
+
+  if (!tabContent) {
+    console.log('Save: No .text-input to save...');
     return;
   };
 
