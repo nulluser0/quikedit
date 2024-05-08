@@ -13,7 +13,7 @@ fn open_file(path: String) -> Result<String, String> {
 }
 
 #[tauri::command]
-async fn save_file(path: String, contents: String) -> Result<(), String> {
+fn save_file(path: String, contents: String) -> Result<(), String> {
     println!("Saving file to path: {}", path);
     match fs::write(&path, &contents) {
         Ok(_) => Ok(()),
