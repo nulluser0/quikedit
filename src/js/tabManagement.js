@@ -9,10 +9,20 @@ export function showDefaultPageCheck() {
 export function removeUnsavedChangesData() {
     let currentTab = $('#tabLinks .active');
     currentTab.data('unsavedChanges', true);
-    if (currentTab.text().trim().endsWith(' •')) {
+    if (currentTab.text().endsWith(' •')) {
         // If so, remove ' •' to the text
-        currentTab.text().replace(' •', '');
+        currentTab.text(currentTab.text().replace(' •', ''));
     }
+}
+
+export function addSaveDirectoryData(tab, directory) {
+    // Split the file path using the directory separator
+    let fileName = directory.split(/[\\/]/);
+    // Return the last part of the path, which will be the file name
+    fileName = fileName[fileName.length - 1];
+
+    $(tab).text(fileName);
+    $(tab).data('savedirectory', directory);
 }
 
 // Scroll to active tab logic
@@ -58,18 +68,8 @@ export function newTab() {
 
 // Open tab from file
 export function openTabFromFile(directory, content) {
-    // Split the file path using the directory separator
-    let fileName = directory.split(/[\\/]/);
-    // Return the last part of the path, which will be the file name
-    fileName = fileName[fileName.length - 1];
-    
     let [tab, tabContent] = newTab(); // Create a new tab
-
-    console.log(tab, tabContent);
-    
-    $(tab).text(fileName);
-    $(tab).data('savedirectory', directory);
-    console.log($(tab).data('savedirectory'))
+    addSaveDirectoryData(tab, directory)
     $(tabContent).children('.text-input').text(content);
 }
 

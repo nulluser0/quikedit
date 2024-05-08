@@ -38,6 +38,23 @@ export async function requestSaveFile() {
     return;
 }
 
+export async function requestSaveAs() {
+    const result = await tauri.dialog.save ({
+        title: "Save File As",
+        multiple: false,
+        defaultPath: 'C:/Users/User/Documents/',
+        filters: [
+            {
+                name: 'Text Documents',
+                extensions: ['txt']
+            }
+        ]
+    });
+
+    if (result) return result;
+    return;
+}
+
 export async function openFile(path) {
     if (!path) return;
     await console.log('open: ' + path);

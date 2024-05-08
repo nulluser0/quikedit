@@ -41,12 +41,11 @@ $(document).on('keydown', null, 'Ctrl+O', async function (e) {
   }
 });
 
-$(document).on('keydown', null, 'Ctrl+S', async function (e) {
-  // TODO: put check for data savedirectory;
-  e.preventDefault();
+function saveFunction() {
   let tabLink = $('#tabLinks .active');
   let targetTab = tabLink.data('tab');
 
+  // If no active tab, return.
   if (!targetTab) {
     console.log('Save: No active tab...');
     return;
@@ -54,16 +53,62 @@ $(document).on('keydown', null, 'Ctrl+S', async function (e) {
 
   let tabContent = $(targetTab).children('.text-input');
 
+  // If no text-input, return.
   if (!tabContent) {
     console.log('Save: No .text-input to save...');
     return;
   };
 
+  let tabText = tabContent.val();
+  return tabText
+}
+
+$(document).on('keydown', null, 'Ctrl+S', async function (e) {
+  e.preventDefault();
+
+  let tabText = saveFunction();
+  if (!tabText) return;
+
   try {
-    let filePath = await fileUtils.requestSaveFile();
-    await fileUtils.saveFile(filePath, tabContent);
+    let filePath = $(tabLink).data('savedirectory');
+    if (!$(tabLink).data('savedirectory')) {
+      filePath = await fileUtils.requestSaveFile();
+    }
+
+    if (!filePath) {
+      console.log('save: No path specified.');
+      return;
+    }
+    
+    await fileUtils.saveFile(filePath, tabText);
+    tabManagement.removeUnsavedChangesData();
+    tabManagement.addSaveDirectoryData(tabLink, filePath)
   } catch (error) {
     console.error('Error: ', error);
-    // toast notification
+    // TODO: toast notification
+  }
+})
+
+$(document).on('keydown', null, 'Ctrl+Shift+S', async function (e) {
+  // TODO: put check for data savedirectory
+  e.preventDefault();
+
+  let tabText = saveFunction();
+  if (!tabText) return;
+
+  try {
+    filePath = await fileUtils.requestSaveAs();
+
+    if (!filePath) {
+      console.log('save: No path specified.');
+      return;
+    }
+    
+    await fileUtils.saveFile(filePath, tabText);
+    tabManagement.removeUnsavedChangesData();
+    tabManagement.addSaveDirectoryData(tabLink, filePath)
+  } catch (error) {
+    console.error('Error: ', error);
+    // TODO: toast notification
   }
 })
