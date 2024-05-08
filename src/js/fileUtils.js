@@ -40,26 +40,16 @@ export async function requestSaveFile() {
 
 export async function openFile(path) {
     if (!path) return;
-
     await console.log('open: ' + path);
-
     let contents = await gateway.open_file(path);
-
-    await console.log(contents);
-
     await tabManagement.openTabFromFile(path, contents)
-
     return;
 }
 
 export async function saveFile(path, contents) {
     if (!path) return;
-
     await console.log('save: ' + path);
-
-    // gateway save file
-
+    await gateway.save_file(path, contents);
     // textInputManagement or tabManagement .removeModifiedData();
-
     return;
 }

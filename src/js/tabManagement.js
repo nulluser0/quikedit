@@ -5,6 +5,15 @@ export function showDefaultPageCheck() {
     }
 }
 
+export function removeUnsavedChangesData() {
+    let currentTab = $('#tabLinks .active');
+    currentTab.data('unsavedChanges', true);
+    if (currentTab.text().trim().endsWith(' •')) {
+        // If so, remove ' •' to the text
+        currentTab.text().replace(' •', '');
+    }
+}
+
 // Scroll to active tab logic
 let tabLinksScrollAnimation = null;
 export function tabLinksScrollToSpecificTab(tab) {
@@ -180,3 +189,13 @@ document.getElementById("tabLinks").addEventListener("wheel", function (e) {
     if (e.deltaY > 0) document.getElementById("tabLinks").scrollLeft += 100;
     else document.getElementById("tabLinks").scrollLeft -= 100;
 });
+
+// Marks tab as unsaved if modified.
+$(document).on('input','.text-input' , function(e) {
+    let currentTab = $('[data-tab="#' + $(this).parent().attr('id') + '"]');
+    currentTab.data('unsavedChanges', true);
+    if (!currentTab.text().trim().endsWith(' •')) {
+        // If not, append ' •' to the text
+        currentTab.text(currentTab.text() + ' •');
+    }
+})
