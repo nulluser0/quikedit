@@ -79,7 +79,7 @@ $(document).on('keydown', null, 'Ctrl+S', async function (e) {
       console.log('save: No path specified.');
       return;
     }
-    
+
     await fileUtils.saveFile(filePath, tabText);
     tabManagement.removeUnsavedChangesData();
     tabManagement.addSaveDirectoryData(tabLink, filePath)
@@ -103,7 +103,7 @@ $(document).on('keydown', null, 'Ctrl+Shift+S', async function (e) {
       console.log('save: No path specified.');
       return;
     }
-    
+
     await fileUtils.saveFile(filePath, tabText);
     tabManagement.removeUnsavedChangesData();
     tabManagement.addSaveDirectoryData(tabLink, filePath)

@@ -5,7 +5,27 @@ export function showDefaultPageCheck() {
     }
 }
 
-// TODO:
+export function updateLineColIndicator() {
+    let tabLink = $('#tabLinks .active');
+    let targetTab = tabLink.data('tab');
+    let activeTextArea = $(targetTab).children('.text-input');
+
+    console.log(activeTextArea);
+
+    if (activeTextArea.length === 0) {
+        $('#lineColIndicator').text('Ln _, Col _');
+        $('#lineColIndicator').addClass('hidden')
+    }
+
+    let cursorPos = activeTextArea.prop('selectionStart');
+    let text = activeTextArea.val();
+    let lines = text.substr(0, cursorPos).split('\n');
+    let lineNum = lines.length;
+    let colNum = lines[lines.length - 1].length + 1;
+    $('#lineColIndicator').removeClass('hidden')
+    $('#lineColIndicator').text('Ln ' + lineNum + ', Col ' + colNum);
+}
+
 export function removeUnsavedChangesData() {
     let currentTab = $('#tabLinks .active');
     currentTab.data('unsavedChanges', true);
@@ -63,6 +83,7 @@ export function newTab() {
     $(newTabContent).children('.text-input').trigger("focus");
 
     tabLinksScrollToSpecificTab(newTab);
+    updateLineColIndicator();
     return [newTab, newTabContent];
 }
 
@@ -71,6 +92,7 @@ export function openTabFromFile(directory, content) {
     let [tab, tabContent] = newTab(); // Create a new tab
     addSaveDirectoryData(tab, directory)
     $(tabContent).children('.text-input').text(content);
+    updateLineColIndicator();
 }
 
 // Delete tab
@@ -105,6 +127,7 @@ export function deleteTab() {
     $(targetNextTab).children('.text-input').trigger("focus");
 
     showDefaultPageCheck();
+    updateLineColIndicator();
 }
 
 // Tab after. (Ctrl + Tab)
@@ -128,6 +151,7 @@ export function nextTab() {
     $(targetTab).children('.text-input').trigger("focus");
 
     tabLinksScrollToSpecificTab(nextTab);
+    updateLineColIndicator();
 }
 
 // Tab before. (Ctrl + Shift + Tab)
@@ -151,6 +175,7 @@ export function prevTab() {
     $(targetTab).children('.text-input').trigger("focus");
 
     tabLinksScrollToSpecificTab(nextTab);
+    updateLineColIndicator();
 }
 
 // Move left
@@ -180,6 +205,7 @@ $(document).on('click', '#tabLink', function () {
     $(this).addClass('active').siblings('#tabLink').removeClass('active');
 
     $(targetTab).children('.text-input').trigger("focus");
+    updateLineColIndicator();
 });
 
 // New tab on click
@@ -191,12 +217,15 @@ document.getElementById("tabLinks").addEventListener("wheel", function (e) {
     else document.getElementById("tabLinks").scrollLeft -= 100;
 });
 
-// Marks tab as unsaved if modified.
-$(document).on('input','.text-input' , function(e) {
+$(document).on('input', '.text-input', function (e) {
+    // Marks tab as unsaved if modified.
     let currentTab = $('[data-tab="#' + $(this).parent().attr('id') + '"]');
     currentTab.data('unsavedChanges', true);
     if (!currentTab.text().trim().endsWith(' •')) {
         // If not, append ' •' to the text
         currentTab.text(currentTab.text() + ' •');
     }
+
+    // Line and Col indicator:
+    updateLineColIndicator();
 })
