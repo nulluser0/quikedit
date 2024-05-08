@@ -12,9 +12,18 @@ fn open_file(path: String) -> Result<String, String> {
     }
 }
 
+#[tauri::command]
+async fn save_file(file_path: String, file_contents: String) -> Result<(), String> {
+    println!("Saving file to path: {}", file_path);
+    match fs::write(&file_path, &file_contents) {
+        Ok(_) => Ok(()),
+        Err(err) => Err(format!("Failed to save file: {}", err)),
+    }
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![open_file])
+        .invoke_handler(tauri::generate_handler![open_file, save_file])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

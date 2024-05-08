@@ -27,7 +27,6 @@ export function resetFontSize() {
 // Marks tab as unsaved if modified.
 $(document).on('input','.text-input' , function(e) {
     let currentTab = $('[data-tab="#' + $(this).parent().attr('id') + '"]');
-    console.log(currentTab);
     currentTab.data('unsavedChanges', true);
     if (!currentTab.text().trim().endsWith(' •')) {
         // If not, append ' •' to the text

@@ -37,5 +37,25 @@ $(document).on('keydown', null, 'Ctrl+O', async function (e) {
     await fileUtils.openFile(filePath); // Wait for openFile promise to resolve
   } catch (error) {
     console.error('Error:', error);
+    // toast notification
   }
 });
+
+$(document).on('keydown', null, 'Ctrl+S', async function (e) {
+  e.preventDefault();
+  let tabLink = $('#tabLinks .active');
+  let tabContent = tabLink.data('tab').children('.text-input').text();
+
+  if (!tabContent || !tabLink) {
+    console.log('Nothing to save...');
+    return;
+  };
+
+  try {
+    let filePath = await fileUtils.requestSaveFile();
+    await fileUtils.saveFile(filePath, tabContent);
+  } catch (error) {
+    console.error('Error: ', error);
+    // toast notification
+  }
+})
