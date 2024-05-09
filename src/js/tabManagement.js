@@ -1,3 +1,5 @@
+import * as toast from "./toast.js";
+
 // Check if tabs == 0. If so, display default page
 export function showDefaultPageCheck() {
     if ($('#tabLinks #tabLink').length === 0) {
@@ -43,6 +45,11 @@ export function addSaveDirectoryData(tab, directory) {
     $(tab).data('savedirectory', directory);
 }
 
+export function isUnSaved() {
+    let currentTab = $('#tabLinks .active');
+    return currentTab.data('unsavedChanges')
+}
+
 // Scroll to active tab logic
 let tabLinksScrollAnimation = null;
 export function tabLinksScrollToSpecificTab(tab) {
@@ -70,7 +77,7 @@ export function newTab() {
     while ($('#tab' + newTabId).length > 0) {
         newTabId++;
     }
-    let newTab = $('<li id="tabLink" data-tab="#tab' + newTabId + '">Tab ' + newTabId + '</li>');
+    let newTab = $('<li id="tabLink" data-tab="#tab' + newTabId + '">Untitled-' + newTabId + '</li>');
     let newTabContent = $('<div id="tab' + newTabId + '"><textarea class="text-input"></textarea></div>')
     $('#tabNewTabButton').before(newTab);
     $('#mainContainer').children().append(newTabContent);
@@ -94,7 +101,12 @@ export function openTabFromFile(directory, content) {
 }
 
 // Delete tab
-export function deleteTab() {
+export function deleteTab(ignoreUnsaved) {
+    if (isUnSaved() && !ignoreUnsaved) {
+        toast.newSimpleToast('Unsaved changes at ' + $('#tabLinks .active').text().replace(' •', '') + '. Ctrl+Shift+W to force close.')
+        return;
+    }
+
     let currentDeletionTab = $('#tabLinks .active');
     let previousTab = currentDeletionTab.prev('#tabLink');
     if (previousTab.length === 0) {

@@ -7,6 +7,7 @@ import * as toast from './toast.js';
 // Tab Management:
 $(document).on('keydown', null, 'Ctrl+T', function (e) { e.preventDefault(); tabManagement.newTab() });
 $(document).on('keydown', null, 'Ctrl+W', function (e) { e.preventDefault(); tabManagement.deleteTab() });
+$(document).on('keydown', null, 'Ctrl+Shift+W', function (e) { e.preventDefault(); tabManagement.deleteTab(true) });
 $(document).on('keydown', null, 'Ctrl+Tab', function (e) { e.preventDefault(); tabManagement.nextTab() });
 $(document).on('keydown', null, 'Ctrl+Shift+Tab', function (e) { e.preventDefault(); tabManagement.prevTab() });
 $(document).on('keydown', null, 'Alt+Left', function (e) { e.preventDefault(); tabManagement.moveTabLeft() });
@@ -84,6 +85,13 @@ $(document).on('keydown', null, 'Ctrl+S', async function (e) {
     await fileUtils.saveFile(filePath, tabText);
     tabManagement.removeUnsavedChangesData();
     tabManagement.addSaveDirectoryData(tabLink, filePath)
+
+    // Split the file path using the directory separator
+    let fileName = filePath.split(/[\\/]/);
+    // Return the last part of the path, which will be the file name
+    fileName = fileName[fileName.length - 1];
+    let message = 'Saved ' + fileName
+    toast.newSimpleToast(message);
   } catch (error) {
     console.error('Error: ', error);
     // TODO: toast notification
@@ -108,11 +116,15 @@ $(document).on('keydown', null, 'Ctrl+Shift+S', async function (e) {
     await fileUtils.saveFile(filePath, tabText);
     tabManagement.removeUnsavedChangesData();
     tabManagement.addSaveDirectoryData(tabLink, filePath)
+
+    // Split the file path using the directory separator
+    let fileName = filePath.split(/[\\/]/);
+    // Return the last part of the path, which will be the file name
+    fileName = fileName[fileName.length - 1];
+    let message = 'Saved ' + fileName
+    toast.newSimpleToast(message);
   } catch (error) {
     console.error('Error: ', error);
     // TODO: toast notification
   }
 })
-
-//debug
-$(document).on('keydown', null, 'Alt+P', function (e) { e.preventDefault(); toast.newToast('title', 'content'); });
