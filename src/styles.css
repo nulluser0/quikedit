@@ -184,7 +184,7 @@ body {
   display: flex;
   position: fixed;
   height: 20px;
-  width: 150px;
+  width: 350px;
   right: 12px;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -197,7 +197,7 @@ body {
   background-color: var(--status-bar-background-color);
   border-radius: 8px;
   margin-bottom: 12px;
-  width: 150px;
+  width: 350px;
 }
 
 #mainContainer {
