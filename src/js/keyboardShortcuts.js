@@ -2,6 +2,7 @@ import * as tabManagement from './tabManagement.js';
 import * as commandPalette from './commandPalette.js';
 import * as textInputManagement from './textInputManagement.js';
 import * as fileUtils from './fileUtils.js';
+import * as toast from './toast.js';
 
 // Tab Management:
 $(document).on('keydown', null, 'Ctrl+T', function (e) { e.preventDefault(); tabManagement.newTab() });
@@ -112,3 +113,6 @@ $(document).on('keydown', null, 'Ctrl+Shift+S', async function (e) {
     // TODO: toast notification
   }
 })
+
+//debug
+$(document).on('keydown', null, 'Alt+P', function (e) { e.preventDefault(); toast.newToast('title', 'content'); });
