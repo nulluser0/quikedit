@@ -10,8 +10,6 @@ export function updateLineColIndicator() {
     let targetTab = tabLink.data('tab');
     let activeTextArea = $(targetTab).children('.text-input');
 
-    console.log(activeTextArea);
-
     if (activeTextArea.length === 0) {
         $('#lineColIndicator').text('Ln _, Col _');
         $('#lineColIndicator').addClass('hidden')
