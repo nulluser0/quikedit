@@ -39,10 +39,11 @@ $(document).on('keydown', null, 'Ctrl+O', async function (e) {
     await fileUtils.openFile(filePath); // Wait for openFile promise to resolve
   } catch (error) {
     console.error('Error:', error);
-    // toast notification
+    toast.newSimpleToast('Error opening file: ' + error);
   }
 });
 
+// File management
 function saveFunction() {
   let tabLink = $('#tabLinks .active');
   let targetTab = tabLink.data('tab');
@@ -94,7 +95,7 @@ $(document).on('keydown', null, 'Ctrl+S', async function (e) {
     toast.newSimpleToast(message);
   } catch (error) {
     console.error('Error: ', error);
-    // TODO: toast notification
+    toast.newSimpleToast('Error saving file: ' + error);
   }
 })
 
@@ -125,6 +126,6 @@ $(document).on('keydown', null, 'Ctrl+Shift+S', async function (e) {
     toast.newSimpleToast(message);
   } catch (error) {
     console.error('Error: ', error);
-    // TODO: toast notification
+    toast.newSimpleToast('Error saving file: ' + error);
   }
 })
